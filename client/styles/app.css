@@ -1,0 +1,13 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:100,400';
+
+body {
+    margin: 0px !important;
+    background-color: #f0f0f0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#container {
+    padding: 10px;
+    margin-top: 64px;
+}
