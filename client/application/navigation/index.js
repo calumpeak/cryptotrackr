@@ -2,7 +2,9 @@
 
 import React, { PropTypes, Component } from 'react';
 import AppBar from 'material-ui/AppBar';
+import Media from 'react-media';
 import TabNavigation from './tab-navigation';
+import DrawerNavigation from './drawer-navigation';
 
 const style = {
     position: 'fixed',
@@ -28,7 +30,13 @@ class Navigation extends Component {
                 showMenuIconButton = {false}
                 zDepth = {2}
             >
-                <TabNavigation />
+                <Media query = '(max-width: 550px)'>
+                    {matches => matches
+                        ? (<DrawerNavigation />)
+                        : (<TabNavigation />)   
+                    }
+                </Media>
+
             </AppBar>
         );
     }

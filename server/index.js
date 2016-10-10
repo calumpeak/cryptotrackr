@@ -1,6 +1,6 @@
 'use strict';
 
-const config = require('./config');
+const config = require('../config');
 const express = require('express');
 const http = require('http');
 const app = express();
@@ -8,11 +8,11 @@ const socketIO = require('socket.io');
 const server = http.createServer(app);
 const io = socketIO(server);
 const path = require('path');
-const api = require('./server/api');
-const Ticker = require('./server/ticker');
+const api = require('./api');
+const Ticker = require('./ticker');
 
-app.use(express.static(path.join(__dirname, './view')));
-app.use(express.static(path.join(__dirname, './dist')));
+app.use(express.static(path.join(__dirname, '../view')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 io.on('connection', (socket) => {
     const ticker = new Ticker({ socket });
