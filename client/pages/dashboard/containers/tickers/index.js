@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { FloatingButton } from '../../../../components/buttons';
+import { FloatingButton } from 'components/buttons';
 import Ticker from './ticker';
 import AddTicker from './add-ticker';
 

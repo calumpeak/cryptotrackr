@@ -4,7 +4,7 @@
 import './styles/app.css';
 
 import React, { PropTypes, Component } from 'react';
-import Nav from './components/nav';
+import Nav from 'components/nav';
 
 // Add necessary providers
 import SocketProvider from './providers/socket-provider';

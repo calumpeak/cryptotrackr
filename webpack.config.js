@@ -20,7 +20,10 @@ const common = {
         app: PATHS.app
     },
     resolve: {
-            extensions: ['', '.js', ',jsx']
+            extensions: ['', '.js', ',jsx'],
+            alias: {
+                components: `${PATHS.app}/components`
+            }
     },
     output: {
         path: PATHS.build,

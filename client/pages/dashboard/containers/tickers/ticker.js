@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
-import { ProgressCircular } from '../../../../components/progress';
+import { ProgressCircular } from 'components/progress';
 
 import _ from 'lodash';
 import Currency from './data';
