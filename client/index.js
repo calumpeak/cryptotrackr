@@ -2,14 +2,12 @@
 
 import React from 'react';
 import { render } from 'react-dom';
+import Router from './router';
 
 import reactTapPlugin from 'react-tap-event-plugin';
-
-import App from './app';
-
 reactTapPlugin();
 
 render(
-    <App />,
+    <Router />,
     document.getElementById('cryptotrackr-app')
 );

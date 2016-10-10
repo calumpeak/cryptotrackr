@@ -22,7 +22,11 @@ const common = {
     resolve: {
             extensions: ['', '.js', ',jsx'],
             alias: {
-                components: `${PATHS.app}/components`
+                components: `${PATHS.app}/components`,
+                styles: `${PATHS.app}/styles`,
+                providers: `${PATHS.app}/providers`,
+                pages: `${PATHS.app}/pages`,
+                router: `${PATHS.app}/router`
             }
     },
     output: {

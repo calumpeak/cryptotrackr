@@ -34,6 +34,7 @@
     "lodash": "^4.16.2",
     "material-ui": "^0.15.4",
     "react": "^15.3.2",
+    "react-router": "^2.8.1",
     "react-tap-event-plugin": "^1.0.0",
     "recharts": "^0.15.1",
     "request": "^2.75.0",

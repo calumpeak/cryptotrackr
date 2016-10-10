@@ -1,32 +1,23 @@
 'use strict';
 
 // CSS
-import './styles/app.css';
+import 'styles/app.css';
 
 import React, { PropTypes, Component } from 'react';
-import Nav from 'components/nav';
+import Navigation from './navigation';
 
 // Add necessary providers
-import SocketProvider from './providers/socket-provider';
-import CurrencyProvider from './providers/currency-provider';
+import SocketProvider from 'providers/socket-provider';
+import CurrencyProvider from 'providers/currency-provider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // Theme it!
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-// Pages
-import Dashboard from './pages/dashboard';
 
-
-class App extends Component {
+class Application extends Component {
     constructor (props) {
         super(props);
-    }
-
-    title () {
-        return (
-            <span>{'Crypto'}<span style = {{fontWeight:100}}>{'trackr'}</span></span>
-        );
     }
 
     render () {
@@ -35,9 +26,9 @@ class App extends Component {
                 <SocketProvider>
                     <CurrencyProvider>
                         <div>
-                            <Nav title = {this.title()} />
+                            <Navigation />
                             <div id='container'>
-                                <Dashboard />
+                                {this.props.children}
                             </div>
                         </div>
                     </CurrencyProvider>
@@ -47,4 +38,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Application;

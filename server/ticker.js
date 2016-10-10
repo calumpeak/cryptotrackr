@@ -7,9 +7,8 @@ const _ = require('lodash');
 
 const debounceTime = 100;
 
-// Cryptocompare's API caches for 5 seconds. To minimise server-to-server lag
-// based on requests from the client, we should tick at half that rate
-const tickTime = 2500;
+// Cryptocompare's API caches for 5 seconds. They kindly request we poll at 10s
+const tickTime = 10000;
 
 
 /**
