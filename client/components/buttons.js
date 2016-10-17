@@ -5,9 +5,9 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
 const floatingButtonStyle = {
-    position: 'fixed',
-    right: '10px',
-    bottom: '10px'
+    position: 'absolute',
+    right: '0px',
+    bottom: '2px'
 };
 
 const FloatingButton = ({ onClick }) => (

@@ -7,7 +7,7 @@ import routes from 'router/routes';
 import _ from 'lodash';
 
 const tabsStyle = {
-    width: '300px',
+    width: '450px',
     position: 'relative'
 };
 

@@ -30,10 +30,10 @@ class Navigation extends Component {
                 showMenuIconButton = {false}
                 zDepth = {2}
             >
-                <Media query = '(max-width: 550px)'>
+                <Media query = '(max-width: 800px)'>
                     {matches => matches
-                        ? (<DrawerNavigation />)
-                        : (<TabNavigation />)   
+                        ? <DrawerNavigation />
+                        : <TabNavigation />
                     }
                 </Media>
 
