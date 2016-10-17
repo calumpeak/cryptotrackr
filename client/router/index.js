@@ -8,11 +8,9 @@ import Application from '../application';
 const AppRouter = () => (
     <Router history = {hashHistory}>
         <Route path = '/' component = {Application}>
-            {routes.map(route => (
-                route.index
-                    ? <IndexRoute key = {route.path} component = {route.component} />
-                    : <Route key = {route.path} component = {route.component} />
-            ))}
+            {routes.map(route =>
+                <Route key = {route.path} path = {route.path} component = {route.component} />
+            )}
         </Route>
     </Router>
 );

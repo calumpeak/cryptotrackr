@@ -15,9 +15,10 @@ const iconStyle = {
 };
 
 class DrawerNavigation extends Component {
-    constructor (props) {
+    constructor (props, context) {
         super(props);
 
+        this.context = context;
         this.state = {
             open: false
         };
@@ -30,6 +31,8 @@ class DrawerNavigation extends Component {
     }
 
     render () {
+        const { router } = this.context;
+
         return (
             <div>
                 <IconButton
@@ -51,6 +54,7 @@ class DrawerNavigation extends Component {
                                 primaryText = {route.title}
                                 leftIcon = {route.icon}
                                 onTouchTap = {() => {
+                                    router.push(route.path);
                                     this.toggleDrawer();
                                 }}
                             />
@@ -61,5 +65,9 @@ class DrawerNavigation extends Component {
         );
     }
 }
+
+DrawerNavigation.contextTypes = {
+    router: PropTypes.object.isRequired
+};
 
 export default DrawerNavigation;

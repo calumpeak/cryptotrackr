@@ -5,7 +5,7 @@ const request = require('request');
 const async = require('async');
 const _ = require('lodash');
 
-const debounceTime = 100;
+const debounceTime = 250;
 
 // Cryptocompare's API caches for 5 seconds. They kindly request we poll at 10s
 const tickTime = 10000;

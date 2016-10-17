@@ -9,7 +9,6 @@ import StockIcon from 'material-ui/svg-icons/Action/trending-up';
 
 const routes = [
     {
-        index: true,
         path: '/dashboard',
         title: 'Dashboard',
         component: Dashboard,

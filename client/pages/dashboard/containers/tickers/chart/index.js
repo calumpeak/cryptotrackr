@@ -17,7 +17,7 @@ class Chart extends Component {
     constructor (props, context) {
         super(props);
 
-        const tickerId = this.props.tickerId;
+        const { tickerId } = this.props;
 
         this.currencies = tickerId.split(':');
         this.socket = context.socket;
@@ -35,6 +35,12 @@ class Chart extends Component {
             }))});
         });
         this.socket.emit('dayData', { tickerId });
+    }
+
+    componentWillUnmount () {
+        const { tickerId } = this.props;
+
+        this.socket.removeListener(`dayData:${tickerId}`, this.tickerData);
     }
 
     render() {

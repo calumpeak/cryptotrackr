@@ -13,3 +13,5 @@ class Market extends Component {
         );
     }
 }
+
+export default Market;

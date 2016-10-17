@@ -1,9 +1,10 @@
 'use strict';
 
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Tabs from 'material-ui/tabs/tabs';
 import Tab from 'material-ui/tabs/tab';
 import routes from 'router/routes';
+import _ from 'lodash';
 
 const tabsStyle = {
     width: '300px',
@@ -25,17 +26,43 @@ const innerStyle = {
     margin: '5px'
 };
 
-const TabNavigation = () => (
-    <Tabs style = {tabsStyle} inkBarStyle = {barStyle} tabItemContainerStyle = {tabStyle}>
-        {routes.map(route =>
-            <Tab key = {route.title} label = {
-                <div>
-                    <div style = {innerStyle}>{route.icon}</div>
-                    <div style = {innerStyle}>{route.title}</div>
-                </div>
-            }/>
-        )}
-    </Tabs>
-);
+class TabNavigation extends Component {
+    constructor (props, context) {
+        super (props);
+
+        this.context = context;
+        _.some(routes, (route, index) => route.path === context.location.pathname && (this.activeIndex = index));
+    }
+
+    render () {
+        const { router } = this.context;
+
+        return (
+            <Tabs
+                style = {tabsStyle}
+                inkBarStyle = {barStyle}
+                tabItemContainerStyle = {tabStyle}
+                initialSelectedIndex ={ this.activeIndex}>
+                {routes.map(route =>
+                    <Tab
+                        key = {route.title}
+                        onActive = {() => router.push(route.path)}
+                        label = {
+                            <div>
+                                <div style = {innerStyle}>{route.icon}</div>
+                                <div style = {innerStyle}>{route.title}</div>
+                            </div>
+                        }
+                    />
+                )}
+            </Tabs>
+        );
+    }
+}
+
+TabNavigation.contextTypes = {
+    router: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
+};
 
 export default TabNavigation;
