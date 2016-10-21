@@ -16,14 +16,35 @@ class Tickers extends Component {
         };
     }
 
+    /**
+     * Adds a ticker to the current state
+     *
+     * @for Tickers
+     * @method addTicker
+     * @param {String} tickerId
+     */
     addTicker (tickerId) {
         this.setState({ tickers: [...this.state.tickers, tickerId] });
     }
 
+    /**
+     * Removes a ticker from the current state
+     *
+     * @for Tickers
+     * @method removeTicker
+     * @param {String} tickerId
+     */
     removeTicker (tickerId) {
         this.setState({ tickers: this.state.tickers.filter(ticker => ticker !== tickerId) });
     }
 
+    /**
+     * When triggered sets the dialog open state to the inverse of what it was
+     * previously.
+     *
+     * @for Tickers
+     * @handleOpenState
+     */
     handleDialogOpenState () {
         this.setState({ dialogOpen: !this.state.dialogOpen });
     }

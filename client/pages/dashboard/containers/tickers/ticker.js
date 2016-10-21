@@ -66,6 +66,13 @@ class Ticker extends Component {
         this.socket.emit('forget', { tickerId });
     }
 
+    /**
+     * Sets current state from incoming data
+     *
+     * @for Ticker
+     * @method tickerData
+     * @param {Object} data
+     */
     tickerData (data) {
         const aggregate = data.AggregatedData;
 

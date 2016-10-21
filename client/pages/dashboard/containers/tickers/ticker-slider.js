@@ -28,19 +28,34 @@ class TickerSlider extends Component {
             slidesToShow: this.slidesToShow()
         };
 
-        this.resizeHandler = this.resizeHandler.bind(this);
+        this.slideHandler = this.slideHandler.bind(this);
 
-        window.addEventListener('resize', this.resizeHandler);
+        window.addEventListener('resize', this.slideHandler);
     }
 
     componentWillUnmount () {
-        window.removeEventListener('resize', this.resizeHandler);
+        window.removeEventListener('resize', this.slideHandler);
     }
 
-    resizeHandler () {
+    /**
+     * Updates the current state of slidesToShow
+     *
+     * @for TickerSlider
+     * @method slideHandler
+     */
+    slideHandler () {
         this.setState({ slidesToShow: this.slidesToShow() });
     }
 
+
+    /**
+     * Works out how many tickers to show in the current viewport based on its
+     * deimensions
+     *
+     * @for TickerSlider
+     * @method slidesToShow
+     * @returns {Integer}
+     */
     slidesToShow () {
         var winWidth = document.body.clientWidth;
         var padding = 70; // Hard code for now
@@ -66,5 +81,9 @@ class TickerSlider extends Component {
         );
     }
 }
+
+TickerSlider.propTypes = {
+    tickers: PropTypes.array.isRequired
+};
 
 export default TickerSlider;
