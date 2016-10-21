@@ -1,8 +1,9 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import Divider from 'material-ui/Divider';
 import { FloatingButton } from 'components/buttons';
-import Ticker from './ticker';
+import TickerSlider from './ticker-slider';
 import AddTicker from './add-ticker';
 
 class Tickers extends Component {
@@ -30,21 +31,14 @@ class Tickers extends Component {
     render () {
         const { tickers, dialogOpen } = this.state;
         return (
-            <div style = {{ position: 'relative' }}>
-                <div style ={{ textAlign: 'center' }}>
-                    {tickers.map(tickerId =>
-                        <Ticker
-                            key = {tickerId}
-                            options = {{ tickerId }}
-                        />
-                    )}
-                </div>
+            <div>
+                <TickerSlider tickers = {tickers} />
                 <AddTicker
                     open = {dialogOpen}
                     addTicker = {(tickerId) => this.addTicker(tickerId)}
                     handleOpenState = {() => this.handleDialogOpenState()}
                 />
-            <FloatingButton onClick = {() => this.handleDialogOpenState()}/>
+                <FloatingButton onClick = {() => this.handleDialogOpenState()}/>
             </div>
         );
     }

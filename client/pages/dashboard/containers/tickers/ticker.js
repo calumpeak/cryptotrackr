@@ -19,11 +19,9 @@ const defaultFields = {
 };
 
 const containerStyle = {
-    margin: '10px',
+    margin: '10px auto 10px',
     height: '200px',
-    width: '350px',
-    display: 'inline-block',
-    textAlign: 'left'
+    width: '350px'
 };
 
 const tickerStyle = {
