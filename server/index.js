@@ -31,8 +31,12 @@ io.on('connection', (socket) => {
         ticker.forget({tickerId: data.tickerId});
     });
 
+    socket.on('hourData', (data) => {
+        api.hourData(socket, data.tickerId);
+    });
+
     socket.on('dayData', (data) => {
-        api.dayData(data.tickerId, socket);
+        api.dayData(socket, data.tickerId, data.days);
     });
 });
 

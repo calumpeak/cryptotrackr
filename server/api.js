@@ -2,7 +2,7 @@
 
 const request = require('request');
 
-const dayData = (tickerId, socket) => {
+const hourData = (socket, tickerId) => {
     const currencyPair = tickerId.split(':');
     const cryptoCurrency = currencyPair[0];
     const currency = currencyPair[1];
@@ -21,10 +21,36 @@ const dayData = (tickerId, socket) => {
 
         body = JSON.parse(body);
 
+        socket.emit(`hourData:${tickerId}`, body);
+    });
+};
+
+const dayData = (socket, tickerId, days) => {
+    const currencyPair = tickerId.split(':');
+    const cryptoCurrency = currencyPair[0];
+    const currency = currencyPair[1];
+
+    days = days || 90;
+
+    const requestOptions = {
+        url: `https://www.cryptocompare.com/api/data/histoday/?aggregate=1&e=CCCAGG&fsym=${cryptoCurrency}&limit=${days}&tsym=${currency}`,
+        headers: {
+            Origin: 'https://www.cryptocompare.com'
+        }
+    };
+
+    request(requestOptions, (err, res, body) => {
+        if (err) {
+            return;
+        }
+
+        body = JSON.parse(body);
+
         socket.emit(`dayData:${tickerId}`, body);
     });
 };
 
 module.exports = {
+    hourData,
     dayData
 };

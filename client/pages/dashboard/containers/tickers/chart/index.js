@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { ResponsiveContainer, CartesianAxis, LineChart, XAxis, YAxis, Tooltip, Line } from 'recharts';
+import { ResponsiveContainer, LineChart, XAxis, YAxis, Tooltip, Line } from 'recharts';
 import ToolTip from './tooltip';
 import _ from 'lodash';
 
@@ -28,19 +28,20 @@ class Chart extends Component {
             data: []
         };
 
-        this.socket.on(`dayData:${tickerId}`, (data) => {
+        this.socket.on(`hourData:${tickerId}`, (data) => {
             this.setState({data: data.Data.map(hourData => ({
                 name: new Date(+hourData.time * 1000).getHours(),
                 close: hourData.close
             }))});
         });
-        this.socket.emit('dayData', { tickerId });
+
+        this.socket.emit('hourData', { tickerId });
     }
 
     componentWillUnmount () {
         const { tickerId } = this.props;
 
-        this.socket.removeListener(`dayData:${tickerId}`, this.tickerData);
+        this.socket.removeListener(`hourData:${tickerId}`, this.tickerData);
     }
 
     render() {
