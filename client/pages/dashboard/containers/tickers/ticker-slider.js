@@ -3,15 +3,14 @@
 import React, { Component, PropTypes } from 'react';
 import Slider from 'react-slick';
 import Ticker from './ticker';
-import NextIcon from 'material-ui/svg-icons/image/navigate-next';
-import PrevIcon from 'material-ui/svg-icons/image/navigate-before';
+import { ArrowNext, ArrowPrev } from './arrows';
 import _ from 'lodash';
 
 const sliderConfig = {
     dots: false,
     infinite: true,
-    nextArrow: <NextIcon />,
-    prevArrow: <PrevIcon />
+    nextArrow: <div><ArrowNext /></div>,
+    prevArrow: <div><ArrowPrev /></div>
 };
 
 const wrapperStyle = {
