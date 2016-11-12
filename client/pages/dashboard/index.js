@@ -1,6 +1,9 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import tickerActions from './actions/tickers';
 import AddTicker from './containers/tickers/add-ticker';
 import { FloatingButton } from 'components/buttons';
 import Tickers from './containers/tickers';
@@ -11,32 +14,9 @@ class Dashboard extends Component {
         super(props);
 
         this.state = {
-            tickers: ['BTC:USD', 'ETH:USD', 'DASH:USD', 'XMR:USD', 'LTC:USD', 'NAV:BTC', 'MAID:BTC', 'AMP:BTC', 'DOGE:USD'],
             dialogOpen: false,
             selectedTicker: null
         };
-    }
-
-    /**
-     * Adds a ticker to the current state
-     *
-     * @for Dashboard
-     * @method addTicker
-     * @param {String} tickerId
-     */
-    addTicker (tickerId) {
-        this.setState({ tickers: [...this.state.tickers, tickerId] });
-    }
-
-    /**
-     * Removes a ticker from the current state
-     *
-     * @for Dashboard
-     * @method removeTicker
-     * @param {String} tickerId
-     */
-    removeTicker (tickerId) {
-        this.setState({ tickers: this.state.tickers.filter(ticker => ticker !== tickerId) });
     }
 
     /**
@@ -51,7 +31,9 @@ class Dashboard extends Component {
     }
 
     render () {
-        const { tickers, dialogOpen, selectedTicker } = this.state;
+        const { dialogOpen, selectedTicker } = this.state;
+        const { tickers } = this.props;
+        const { addTicker } = this.props.actions;
 
         return (
             <div>
@@ -59,7 +41,7 @@ class Dashboard extends Component {
                 <CoinData tickerId = {selectedTicker || tickers[0]}/>
                 <AddTicker
                     open = {dialogOpen}
-                    addTicker = {(tickerId) => this.addTicker(tickerId)}
+                    addTicker = {addTicker}
                     handleOpenState = {() => this.handleDialogOpenState()}
                 />
                 <FloatingButton onClick = {() => this.handleDialogOpenState()}/>
@@ -69,7 +51,19 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-
+    tickers: PropTypes.array,
+    actions: PropTypes.object
 };
 
-export default Dashboard;
+const mapStateToProps = (state) =>({
+    tickers: state.dashboard.tickers
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(tickerActions, dispatch)
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Dashboard);

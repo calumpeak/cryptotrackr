@@ -26,7 +26,9 @@ const common = {
                 styles: `${PATHS.app}/styles`,
                 providers: `${PATHS.app}/providers`,
                 pages: `${PATHS.app}/pages`,
-                router: `${PATHS.app}/router`
+                router: `${PATHS.app}/router`,
+                utils: `${PATHS.app}/utils`,
+                store: `${PATHS.app}/store`
             }
     },
     output: {
