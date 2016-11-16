@@ -23,6 +23,7 @@ const common = {
             extensions: ['', '.js', ',jsx'],
             alias: {
                 components: `${PATHS.app}/components`,
+                HOC: `${PATHS.app}/HOC`,
                 styles: `${PATHS.app}/styles`,
                 providers: `${PATHS.app}/providers`,
                 pages: `${PATHS.app}/pages`,

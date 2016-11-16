@@ -24,6 +24,10 @@ class Chart extends Component {
         this.state = {
             data: []
         };
+    }
+
+    componentDidMount () {
+        const { tickerId } = this.props;
 
         this.socket.on(`dayData:${tickerId}`, (data) => {
             this.setState({ data: data.Data.map(dayData => ({
@@ -38,7 +42,7 @@ class Chart extends Component {
     componentWillUnmount () {
         const { tickerId } = this.props;
 
-        this.socket.removeListener(`hourData:${tickerId}`, this.tickerData);
+        this.socket.removeListener(`dayData:${tickerId}`, this.tickerData);
     }
 
     render () {

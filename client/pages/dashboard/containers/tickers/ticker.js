@@ -2,10 +2,9 @@
 
 import React, { Component, PropTypes } from 'react';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
-import { ProgressCircular } from 'components/progress';
-
+import TickerPanel from './ticker-panel';
 import _ from 'lodash';
-import Currency from './data';
+
 
 const defaultFields = {
     currencyTo: '',
@@ -21,29 +20,9 @@ const defaultFields = {
 const containerStyle = {
     margin: '10px auto 10px',
     height: '200px',
-    width: '350px'
-};
-
-const tickerStyle = {
-    height: '200px',
     width: '350px',
+    backgroundColor: '#FFFFFF'
 };
-
-const headerStyle = {
-    paddingBottom: '0px',
-    fontWeight: 'bold'
-};
-
-const bodyStyle = {
-    paddingLeft: '0px',
-    paddingRight: '0px'
-};
-
-const progressStyle = {
-    borderRadius: '2px',
-    backgroundColor: 'rgb(255, 255, 255)'
-};
-
 
 class Ticker extends Component {
     constructor (props, context) {
@@ -52,9 +31,14 @@ class Ticker extends Component {
         const { tickerId } = this.props.options;
 
         this.state = _.assign({}, defaultFields);
+        this.socket = context.socket;
 
         this.tickerData = this.tickerData.bind(this);
-        this.socket = context.socket;
+    }
+
+    componentDidMount () {
+        const { tickerId } = this.props.options;
+
         this.socket.on(`ticker:${tickerId}`, this.tickerData);
         this.socket.emit('schedule', { tickerId });
     }
@@ -94,15 +78,7 @@ class Ticker extends Component {
 
         return (
             <div style = {containerStyle}>
-                {currencyFrom
-                    ?   <Card style = {tickerStyle}>
-                            <CardHeader title = {`${currencyFrom} - ${currencyTo}`} style = {headerStyle} />
-                            <CardText style = {bodyStyle}>
-                                <Currency tickerId = {tickerId}  {...this.state} />
-                            </CardText>
-                        </Card>
-                    :   <ProgressCircular style = {progressStyle}/>
-                }
+                <TickerPanel tickerId = {tickerId}  {...this.state} />
             </div>
         );
     }

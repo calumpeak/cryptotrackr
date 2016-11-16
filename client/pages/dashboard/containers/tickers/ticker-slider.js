@@ -28,7 +28,9 @@ class TickerSlider extends Component {
         };
 
         this.slideHandler = this.slideHandler.bind(this);
+    }
 
+    componentDidMount () {
         window.addEventListener('resize', this.slideHandler);
     }
 
@@ -45,7 +47,6 @@ class TickerSlider extends Component {
     slideHandler () {
         this.setState({ slidesToShow: this.slidesToShow() });
     }
-
 
     /**
      * Works out how many tickers to show in the current viewport based on its
