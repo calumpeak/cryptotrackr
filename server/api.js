@@ -16,7 +16,7 @@ const hourData = (socket, tickerId) => {
 
     request(requestOptions, (err, res, body) => {
         if (err) {
-            return;
+            return res.sendStatus(404);
         }
 
         body = JSON.parse(body);
@@ -41,7 +41,7 @@ const dayData = (socket, tickerId, days) => {
 
     request(requestOptions, (err, res, body) => {
         if (err) {
-            return;
+            return res.sendStatus(404);
         }
 
         body = JSON.parse(body);

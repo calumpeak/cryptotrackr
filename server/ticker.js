@@ -73,10 +73,16 @@ class Ticker {
 
             ongoing = request(requestOptions, (err, res, body) => {
                 if (err) {
-                    callback(err);
+                    this.sendError(tickerId, err);
+                    return callback(null);
                 }
 
-                body = JSON.parse(body);
+                try {
+                    body = JSON.parse(body);
+                } catch (e) {
+                    this.sendError(tickerId, err);
+                    return callback(null);
+                }
 
                 this.sendData(tickerId, body.Data);
                 callback(null);
@@ -84,6 +90,10 @@ class Ticker {
         };
 
         // Kill any ongoing requests asynchronously if necessary
+        // TODO: There is a potential memory leak here that needs fixing
+        // TODO: Is it viable to kill an ongoing request? the callback will never
+        // be called and will cause the loop to hang indefinitely.
+        // May be simpler to remove killing logic
         this.events.on('stopOngoing', (event) => {
             setImmediate(() => {
                 if ((event.all || event.tickerId === tickerId) && ongoing) {
@@ -186,6 +196,21 @@ class Ticker {
         }
 
         this.socket.emit(`ticker:${tickerId}`, _.defaults(data));
+    }
+
+    /**
+     * Sends and error via the socket
+     * We don't want to break the flow of the parallel calls
+     *
+     * @for Ticker
+     * @method sendError
+     */
+    sendError (tickerId, error) {
+        if (!this.socket.connected) {
+            return;
+        }
+
+        this.socket.emit(`ticker:${tickerId}`, { error});
     }
 }
 
