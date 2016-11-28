@@ -11,7 +11,7 @@ const headerStyle = {
 };
 
 const bodyStyle = {
-    height: '75px'
+    height: '125px'
 };
 
 const footerStyle = {
@@ -48,12 +48,12 @@ class Data extends Component {
                 <div style = {bodyStyle}>
                     <Chart tickerId = {tickerId} />
                 </div>
-                <div style = {footerStyle}>
+                {/*<div style = {footerStyle}>
                     {`${lastMarket}`}
                     <span style = {floatedRight}>
                         {`${new Date().getMinutes() - new Date(+lastUpdate * 1000).getMinutes()} min ago`}
                     </span>
-                </div>
+                </div>*/}
             </div>
         );
     }

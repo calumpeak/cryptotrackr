@@ -21,13 +21,13 @@ const iconStyle = {
 };
 
 const ArrowNext = () => (
-    <Paper style = {paperStyle}>
+    <Paper style = {paperStyle} zDepth = '0'>
         <NextIcon style = {iconStyle} />
     </Paper>
 );
 
 const ArrowPrev = () => (
-    <Paper style = {paperStyle}>
+    <Paper style = {paperStyle} zDepth = '0'>
         <PrevIcon style = {iconStyle} />
     </Paper>
 );

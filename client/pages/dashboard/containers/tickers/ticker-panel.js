@@ -8,6 +8,9 @@ import { LoaderCircular } from 'HOC/loader';
 const tickerStyle = {
     height: '200px',
     width: '350px',
+    boxShadow: 'none',
+    overflow: 'hidden',
+    cursor: 'pointer'
 };
 
 const headerStyle = {

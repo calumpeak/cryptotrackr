@@ -2,7 +2,7 @@
 
 import { nameSpace } from '../constants';
 
-const initalState = ['BTC:USD', 'ETH:USD', 'DASH:USD', 'XMR:USD', 'LTC:USD', 'NAV:BTC', 'MAID:BTC', 'AMP:BTC', 'DOGE:USD'];
+const initalState = ['BTC:USD', 'ETH:USD', 'DASH:USD', 'XMR:USD', 'LTC:USD', 'AMP:BTC', 'DOGE:USD'];
 
 const tickerReducer = (state = initalState, action) => {
     switch (action.type) {

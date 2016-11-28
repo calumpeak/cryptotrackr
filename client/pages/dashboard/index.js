@@ -38,13 +38,6 @@ class Dashboard extends Component {
         return (
             <div>
                 <Tickers tickers = {tickers}/>
-                <CoinData tickerId = {selectedTicker || tickers[0]}/>
-                <AddTicker
-                    open = {dialogOpen}
-                    addTicker = {addTicker}
-                    handleOpenState = {() => this.handleDialogOpenState()}
-                />
-                <FloatingButton onClick = {() => this.handleDialogOpenState()}/>
             </div>
         );
     }
@@ -67,3 +60,12 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(Dashboard);
+
+//
+// <CoinData tickerId = {selectedTicker || tickers[0]}/>
+// <AddTicker
+//     open = {dialogOpen}
+//     addTicker = {addTicker}
+//     handleOpenState = {() => this.handleDialogOpenState()}
+// />
+// <FloatingButton onClick = {() => this.handleDialogOpenState()}/>
