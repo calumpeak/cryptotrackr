@@ -1,11 +1,8 @@
 'use strict';
 
-import { createStore, combineReducers } from 'redux';
+import { createStore } from 'redux';
+import rootReducer from 'ducks';
 
-import dashboard from 'pages/dashboard/reducers';
-
-const store = createStore(combineReducers({
-    dashboard
-}));
+const store = createStore(rootReducer);
 
 export default store;

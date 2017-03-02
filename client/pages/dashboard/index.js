@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import tickerActions from './actions/tickers';
+import * as tickerActions from 'ducks/tickers';
 import AddTicker from './containers/tickers/add-ticker';
 import { FloatingButton } from 'components/buttons';
 import Tickers from './containers/tickers';
@@ -49,7 +49,7 @@ Dashboard.propTypes = {
 };
 
 const mapStateToProps = (state) =>({
-    tickers: state.dashboard.tickers
+    tickers: state.tickers
 });
 
 const mapDispatchToProps = (dispatch) => ({
