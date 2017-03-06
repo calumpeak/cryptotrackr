@@ -1,10 +1,9 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import Slider from 'react-slick';
-import Ticker from './ticker';
+import Slick from 'react-slick';
 import { ArrowNext, ArrowPrev } from './arrows';
-import _ from 'lodash';
+import { merge } from 'lodash';
 
 const sliderConfig = {
     dots: false,
@@ -19,7 +18,7 @@ const wrapperStyle = {
     marginRight: '20px'
 };
 
-class TickerSlider extends Component {
+class Slider extends Component {
     constructor (props) {
         super(props);
 
@@ -41,7 +40,7 @@ class TickerSlider extends Component {
     /**
      * Updates the current state of slidesToShow
      *
-     * @for TickerSlider
+     * @for Slider
      * @method slideHandler
      */
     slideHandler () {
@@ -49,10 +48,10 @@ class TickerSlider extends Component {
     }
 
     /**
-     * Works out how many tickers to show in the current viewport based on its
+     * Works out how many slides to show in the current viewport based on its
      * deimensions
      *
-     * @for TickerSlider
+     * @for Slider
      * @method slidesToShow
      * @returns {Integer}
      */
@@ -65,25 +64,20 @@ class TickerSlider extends Component {
     }
 
     render () {
-        const { tickers } = this.props;
         const { slidesToShow } = this.state;
 
         return (
             <div style = {wrapperStyle}>
-                <Slider {..._.merge(sliderConfig, { slidesToShow })}>
-                    {tickers.map(tickerId =>
-                        <div key = {tickerId} >
-                            <Ticker options = {{ tickerId }} />
-                        </div>
-                    )}
-                </Slider>
+                <Slick {...merge(sliderConfig, { slidesToShow })}>
+                    {this.props.children}
+                </Slick>
             </div>
         );
     }
 }
 
-TickerSlider.propTypes = {
-    tickers: PropTypes.array.isRequired
+Slider.propTypes = {
+    children: PropTypes.array.isRequired
 };
 
-export default TickerSlider;
+export default Slider;

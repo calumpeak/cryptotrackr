@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import Chart from './chart';
+import Chart from 'components/chart';
 
 const headerStyle = {
     margin: '0px 16px 0px 16px',

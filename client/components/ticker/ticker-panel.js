@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import Data from './data';
-import { LoaderCircular } from 'HOC/loader';
+import { LoaderCircular } from 'components/loader.hoc';
 
 const tickerStyle = {
     height: '200px',

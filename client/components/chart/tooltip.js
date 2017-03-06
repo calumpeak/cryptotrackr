@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import _ from 'lodash';
+import { merge } from 'lodash';
 
 const toolTipStyle = {
     minWidth: '90px',
@@ -19,7 +19,7 @@ class ToolTip extends Component {
 
         const { colours } = this.props;
 
-        this.style = _.merge(toolTipStyle, {
+        this.style = merge(toolTipStyle, {
             border: `1px solid ${colours.borderColor}`,
             backgroundColor: `${colours.canvasColor}`
         });

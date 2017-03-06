@@ -8,7 +8,7 @@ const ADD       = `${ns}ADD`;
 const REMOVE    = `${ns}REMOVE`;
 
 // Initial State
-const initalState = ['BTC:USD', 'ETH:USD', 'DASH:USD', 'XMR:USD', 'LTC:USD', 'AMP:BTC', 'DOGE:USD'];
+const initalState = ['BTC:USD', 'ETH:USD', 'DASH:USD', 'XMR:USD', 'LTC:USD', 'DOGE:USD'];
 
 // Reducer
 export default function reducer (state = initalState, action) {

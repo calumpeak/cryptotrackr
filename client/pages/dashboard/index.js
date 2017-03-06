@@ -4,9 +4,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as tickerActions from 'ducks/tickers';
-import AddTicker from './containers/tickers/add-ticker';
+import AddTicker from './containers/add-ticker';
 import { FloatingButton } from 'components/buttons';
-import Tickers from './containers/tickers';
+import Slider from 'components/slider';
+import Ticker from 'components/ticker';
 import CoinData from './containers/coin-data';
 
 class Dashboard extends Component {
@@ -37,7 +38,13 @@ class Dashboard extends Component {
 
         return (
             <div>
-                <Tickers tickers = {tickers}/>
+                <Slider>
+                    {tickers.map(tickerId =>
+                        <div key = {tickerId} >
+                            <Ticker options = {{ tickerId }} />
+                        </div>
+                    )}
+                </Slider>
             </div>
         );
     }

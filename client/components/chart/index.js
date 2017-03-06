@@ -3,7 +3,6 @@
 import React, { Component, PropTypes } from 'react';
 import { ResponsiveContainer, AreaChart, LineChart, XAxis, YAxis, Tooltip, Line, Area } from 'recharts';
 import ToolTip from './tooltip';
-import _ from 'lodash';
 
 // Line chart takes integers for margins
 const chartMargin = {
@@ -27,6 +26,10 @@ class Chart extends Component {
         this.state = {
             data: []
         };
+    }
+
+    componentDidMount () {
+        const { tickerId } = this.props;
 
         this.socket.on(`hourData:${tickerId}`, (data) => {
             this.setState({data: data.Data.map(hourData => ({
