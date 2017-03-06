@@ -1,7 +1,11 @@
 'use strict';
 
-// Namespace
+import { lastStored } from 'utils/local-storage';
+import { get } from 'lodash';
+
+// Namespaces
 const ns = 'TICKERS_';
+const stateName = 'tickers';
 
 // Action Types
 const ADD       = `${ns}ADD`;
@@ -11,7 +15,7 @@ const REMOVE    = `${ns}REMOVE`;
 const initalState = ['BTC:USD', 'ETH:USD', 'DASH:USD', 'XMR:USD', 'LTC:USD', 'DOGE:USD'];
 
 // Reducer
-export default function reducer (state = initalState, action) {
+export default function reducer (state = get(lastStored, stateName, initalState), action) {
     switch (action.type) {
         case ADD:
             return [...state, action.tickerId];
