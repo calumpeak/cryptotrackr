@@ -8,9 +8,9 @@ import Application from '../application';
 const AppRouter = () => (
     <Router history = {hashHistory}>
         <Route path = '/' component = {Application}>
-            <IndexRoute component = {routes[0].component} />
+            <IndexRoute getComponent = {routes[0].getComponent} />
             {routes.map(route =>
-                <Route key = {route.path} path = {route.path} component = {route.component} />
+                <Route key = {route.path} path = {route.path} getComponent = {route.getComponent} />
             )}
         </Route>
     </Router>

@@ -35,7 +35,8 @@ const common = {
     },
     output: {
         path: PATHS.build,
-        filename: 'cryptotrackr-app.js'
+        filename: 'cryptotrackr-app.js',
+        chunkFilename: '[name].js'
     },
     module: {
         loaders: [
@@ -75,7 +76,8 @@ if (TARGET === 'dev' || !TARGET) {
             new NpmInstallPlugin({
                 save: true // --save
             }),
-            new DashboardPlugin()
+            new DashboardPlugin(),
+            new webpack.optimize.CommonsChunkPlugin('common.js')
         ]
     });
 }
@@ -88,6 +90,7 @@ if (TARGET === 'build') {
                     'NODE_ENV': JSON.stringify('production')
                 }
             }),
+            new webpack.optimize.CommonsChunkPlugin('common.js'),
             new webpack.optimize.UglifyJsPlugin({
                 beautify: false,
                 comments: false,

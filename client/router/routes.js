@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import { Dashboard, Market, News } from 'pages';
 
 // Icons
 import DashboardIcon from 'material-ui/svg-icons/Action/dashboard';
@@ -12,20 +11,32 @@ const routes = [
     {
         path: '/dashboard',
         title: 'Dashboard',
-        component: Dashboard,
-        icon: <DashboardIcon style ={{color: 'inherit'}}/>
+        icon: <DashboardIcon style ={{color: 'inherit'}}/>,
+        getComponent: (loc, callback) => {
+            require.ensure([], (require) => {
+                callback(null, require('pages/dashboard').default);
+            }, 'dashboard');
+        }
     },
     {
         path: '/market',
         title: 'Market',
-        component: Market,
-        icon: <StockIcon style = {{color: 'inherit'}}/>
+        icon: <StockIcon style = {{color: 'inherit'}}/>,
+        getComponent: (loc, callback) => {
+            require.ensure([], (require) => {
+                callback(null, require('pages/market').default);
+            }, 'market');
+        }
     },
     {
         path: '/news',
         title: 'News',
-        component: News,
-        icon: <NewsIcon style = {{color: 'inherit'}}/>
+        icon: <NewsIcon style = {{color: 'inherit'}}/>,
+        getComponent: (loc, callback) => {
+            require.ensure([], (require) => {
+                callback(null, require('pages/news').default);
+            }, 'news');
+        }
     }
 ];
 
