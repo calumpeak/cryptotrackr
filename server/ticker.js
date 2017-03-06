@@ -32,7 +32,6 @@ class Ticker {
 
         // Kill any ongoing requests asynchronously if necessary
         this.events.on('stopOngoing', (event) => {
-            console.log(event.all, event.tickerId);
             setImmediate(() => {
                 if (event.all) {
                     _.forOwn(this.ongoingRequests, (request) => {
