@@ -26,8 +26,23 @@ class Ticker {
         this.events = new Events();
         this.socket = options.socket;
         this.tickers = {};
+        this.ongoingRequests = {};
         this.tickInterval;
         this.tickAllowed = false;
+
+        // Kill any ongoing requests asynchronously if necessary
+        this.events.on('stopOngoing', (event) => {
+            console.log(event.all, event.tickerId);
+            setImmediate(() => {
+                if (event.all) {
+                    _.forOwn(this.ongoingRequests, (request) => {
+                        request.abort();
+                    });
+                } else if (this.ongoingRequests[event.tickerId]) {
+                    this.ongoingRequests[event.tickerId].abort();
+                }
+            });
+        });
 
         // Set a debounce to the class for starting ticker
         // If multiple schedule requests come through within x of each other
@@ -71,7 +86,7 @@ class Ticker {
                 }
             };
 
-            ongoing = request(requestOptions, (err, res, body) => {
+            this.ongoingRequests[tickerId] = request(requestOptions, (err, res, body) => {
                 if (err) {
                     this.sendError(tickerId, err);
                     return callback(null);
@@ -88,19 +103,6 @@ class Ticker {
                 callback(null);
             });
         };
-
-        // Kill any ongoing requests asynchronously if necessary
-        // TODO: There is a potential memory leak here that needs fixing
-        // TODO: Is it viable to kill an ongoing request? the callback will never
-        // be called and will cause the loop to hang indefinitely.
-        // May be simpler to remove killing logic
-        this.events.on('stopOngoing', (event) => {
-            setImmediate(() => {
-                if ((event.all || event.tickerId === tickerId) && ongoing) {
-                    ongoing.abort();
-                }
-            });
-        });
 
         // Attempt to start the ticker if it's not already running
         this.attemptStart();
